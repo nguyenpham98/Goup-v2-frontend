@@ -1,0 +1,12 @@
+#explore__container {
+    padding: 10% 20%;
+}
+
+#explore__card {
+    border: 1px solid black;
+    box-shadow: 5px 10px teal;
+}
+
+#explore__title {
+    margin-bottom: -8%;
+}

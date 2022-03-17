@@ -1,0 +1,10 @@
+#user__profile__card {
+    margin: auto;
+    width: 50%;
+    border: 1px solid black;
+    box-shadow: 5px 10px orange;
+}
+
+#user__profile__posts {
+    margin: 5% 30%;
+}
