@@ -1,0 +1,24 @@
+:root{
+    --orange: #f06937;
+    --teal: #2d969b;
+    --yellow: #f5dc50;
+    --pink: #eb1e4b;
+}
+
+*{
+    box-sizing: border-box;
+}
+#loading__text{
+    margin-top: 30vh;
+}
+
+#logo{
+    background-image: url(/src/media/GOUP-longlogo.png);
+    width: 150px;
+    height: 50px;
+    background-position: center;
+    background-size: cover
+}
+.buttons #button--color{
+    background-color: var(--teal);
+}

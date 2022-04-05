@@ -167,8 +167,8 @@ function App() {
                   {userId ?
                     <>
                       
-                      <Link to='/profile' className="button is-primary mr-3">
-                        <p className='is-size-5'>Profile</p>
+                      <Link to='/profile' className="button mr-3" id="button--color">
+                        <p className='is-white is-size-5'>Profile</p>
                       </Link>
                       <button className="button is-white mr-6" onClick={() => handleLogout()}>
                         <p className='is-size-5'>Log out</p>
@@ -176,8 +176,8 @@ function App() {
                     </>
                     :
                     <>
-                      <Link to='/register' className="button is-primary mr-3">
-                        <p className='is-size-5 has-text-weight-bold'>Sign up</p>
+                      <Link to='/register' className="button mr-3" id="button--color">
+                        <p className='is-size-5 has-text-weight-bold has-text-white'>Sign up</p>
                       </Link>
                       <Link to='/login' className="button is-light mr-6">
                         <p className='is-size-5'>Log in</p>
@@ -210,7 +210,7 @@ function App() {
 
         <Routes>
           <Route index path="/" element={
-            <PrivateRoute auth={userId}>
+             <PrivateRoute auth={userId}>
               <Home/>
             </PrivateRoute> 
           } />
