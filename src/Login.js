@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './login.css'
 import { useNavigate } from 'react-router-dom'
-const Login = ({handleLogin}) => {
+const Login = ({handleLogin, loginStatus}) => {
     let navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -24,6 +24,11 @@ const Login = ({handleLogin}) => {
                     </div>
                 </div>
                 <div className='box has-text-centered'>
+                {loginStatus && <article class="message is-warning">
+                    <div class="message-body">
+                {loginStatus}
+               </div>
+               </article>}
                     <button className="button is-primary is-medium"
                     onClick={() => handleLogin(email,password)}
                     >Log In</button>
@@ -33,6 +38,7 @@ const Login = ({handleLogin}) => {
                 </div>
 
             </form>
+            
         </div>
     )
 }

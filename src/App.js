@@ -22,7 +22,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [postBody, setPostBody] = useState("")
   const [openModal, setOpenModal] = useState(false)
-
+  const [loginStatus, setLoginStatus] = useState("")
   const handleLogin = (email, password) => {
     fetch('http://localhost:5000/auth/login', {
       method: 'POST',
@@ -38,10 +38,14 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        if (data.error)
+        setLoginStatus(data.error)
         setUserId(data.userId)
       })
-      .catch(err => console.log("Error: ", err))
+      .catch(err => {
+        setLoginStatus("error")
+        console.log(loginStatus)
+      })
   }
 
   const handleRegister = (username, email, password) => {
@@ -234,7 +238,7 @@ function App() {
           
           <Route path="login" element={
             <PublicRoute notLoggedIn={!userId}>
-              <Login handleLogin={handleLogin}/>
+              <Login handleLogin={handleLogin} loginStatus={loginStatus}/>
             </PublicRoute>
           } />
           <Route path="register" element={
@@ -245,6 +249,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       }
+      
     </div>
   );
 }
