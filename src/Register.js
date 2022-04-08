@@ -5,6 +5,12 @@ const Register = ({handleRegister}) => {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [registerStatus, setRegisterStatus] = useState("")
+    const isValidPassword = (e) => {
+        var pw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/.test(e.target.value)
+        pw ? setRegisterStatus("") && setPassword(pw) : setRegisterStatus("Password needs to be 8-25 length, at least one uppercase, one lowercase, one number");
+        console.log(pw)
+    }
     return (
         <div className="page register--page">
             <div className="page--left">
@@ -32,10 +38,14 @@ const Register = ({handleRegister}) => {
                 <div className="field">
                     <label className="label">Password</label>
                     <div className="control">
-                        <input className="input" type="password" placeholder="********" onChange={e => setPassword(e.target.value)} />
+                        <input className="input" type="password" placeholder="********" onChange={isValidPassword} />
                     </div>
                 </div>
-
+                {registerStatus && <article className="message is-danger">
+                    <div className="message-body">
+                {registerStatus}
+               </div>
+               </article>}
                 <button className="button has-text-weight-bold" onClick={() => handleRegister(username, email, password)}>Register</button>
             </form>
         </div>

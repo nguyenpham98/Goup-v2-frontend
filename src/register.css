@@ -2,11 +2,13 @@
     padding:10px;
     background: #eee;
     box-shadow: 3px 3px var(--teal), -1em 0 .4em var(--orange);
+    position: relative;
+    width:100vw;
 }
 #container {
     background-color: white;
     margin:20px;
-    width:40%;
+    width:40vw;
     border-radius: 10px;
 }
 #container p{

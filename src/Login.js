@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import './login.css'
 import { useNavigate } from 'react-router-dom'
 const Login = ({handleLogin, loginStatus}) => {
     let navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     return (
-        <div>
-            <p className='has-text-centered has-text-weight-bold has-text-success is-size-1 mt-6'>Welcome to Goup</p>
-            <p className='has-text-centered is-size-4'>social platform for everyone</p>
-            <form id="box" className="box" onSubmit={e => e.preventDefault()}>
+        <div className="page register--page">
+
+        <div id='container'>
+        <p className='is-size-3 has-text-weight-bold ml-4'>Login</p>
+            <form className="box" onSubmit={e => e.preventDefault()}>
                 <div className="field">
                     <label className="label">Email</label>
                     <div className="control">
@@ -23,8 +23,8 @@ const Login = ({handleLogin, loginStatus}) => {
                         <input className="input" type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} />
                     </div>
                 </div>
-                <div className='box has-text-centered'>
-                {loginStatus && <article class="message is-warning">
+                <div className='box'>
+                {loginStatus && <article class="message is-danger">
                     <div class="message-body">
                 {loginStatus}
                </div>
@@ -38,7 +38,7 @@ const Login = ({handleLogin, loginStatus}) => {
                 </div>
 
             </form>
-            
+            </div>
         </div>
     )
 }
