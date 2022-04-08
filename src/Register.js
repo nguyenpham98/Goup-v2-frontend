@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
 import './register.css'
 
-const Register = ({handleRegister}) => {
+const Register = ({handleRegister, registerStatus}) => {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [registerStatus, setRegisterStatus] = useState("")
+    const [passwordStatus, setPasswordStatus] = useState("")
     const isValidPassword = (e) => {
         var pw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/.test(e.target.value)
-        pw ? setRegisterStatus("") && setPassword(pw) : setRegisterStatus("Password needs to be 8-25 length, at least one uppercase, one lowercase, one number");
-        console.log(pw)
+        if(pw || e.target.value == ""){
+        setPasswordStatus("")
+        setPassword(e.target.value)
+        }
+    
+        else {
+            setPassword("")
+            setPasswordStatus("Password needs to be 8-25 length, at least one uppercase, one lowercase, one number")
+        }
+        
     }
+    console.log(password)
     return (
         <div className="page register--page">
             <div className="page--left">
@@ -41,9 +50,14 @@ const Register = ({handleRegister}) => {
                         <input className="input" type="password" placeholder="********" onChange={isValidPassword} />
                     </div>
                 </div>
-                {registerStatus && <article className="message is-danger">
+                {username && registerStatus && <article className="message is-small is-danger">
                     <div className="message-body">
                 {registerStatus}
+                </div>
+                </article>}
+                {passwordStatus && <article className="message is-small is-danger">
+                    <div className="message-body">
+                {passwordStatus}
                </div>
                </article>}
                 <button className="button has-text-weight-bold" onClick={() => handleRegister(username, email, password)}>Register</button>

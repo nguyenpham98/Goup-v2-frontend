@@ -14,6 +14,9 @@
 #container p{
     color: var(--pink)
 }
+#container article{
+    margin-bottom:4px;
+}
 .box .button{
     background-color: var(--pink);
     color: white;

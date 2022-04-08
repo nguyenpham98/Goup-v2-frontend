@@ -23,6 +23,8 @@ function App() {
   const [postBody, setPostBody] = useState("")
   const [openModal, setOpenModal] = useState(false)
   const [loginStatus, setLoginStatus] = useState("")
+  const [registerStatus, setRegisterStatus] = useState("")
+  const [linkStatus, setLinkStatus] = useState(false)
   const handleLogin = (email, password) => {
     fetch('http://localhost:5000/auth/login', {
       method: 'POST',
@@ -38,13 +40,11 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.error) setLoginStatus(data.error)
+        (data.error) && setLoginStatus(data.error)
         setUserId(data.userId)
       })
-      .catch(err => {
-        setLoginStatus("error")
-        console.log(loginStatus)
-      })
+      .catch(err => console.log("Error: ", err)
+    )
   }
 
   const handleRegister = (username, email, password) => {
@@ -63,6 +63,7 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
+        (data.error) && setRegisterStatus(data.error)
         console.log(data)
         setUserId(data.userId)
       })
@@ -119,7 +120,11 @@ function App() {
         setIsLoading(false)
       })
   }, [])
-
+  const handleLink = () => {
+    setRegisterStatus("")
+    setLinkStatus(!linkStatus)
+  
+  }
   return (
     <div>
       {isLoading ? 
@@ -129,7 +134,9 @@ function App() {
       <BrowserRouter>
         <nav className="navbar mt-4" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
-            <div id='logo' className="navbar-item ml-6"></div>
+          <Link to='/'>
+          <div id='logo' className="navbar-item ml-6"></div>
+                </Link>
 
             <Link to='/'
               onClick={() => {
@@ -150,9 +157,6 @@ function App() {
             <div className="navbar-start">
               {userId && 
               <>
-                <Link to='/' className="navbar-item is-size-5 has-text-warning-dark has-text-weight-bold ml-6">
-                  Home
-                </Link>
                   <Link to='/explore' className="navbar-item is-size-5 has-text-primary-dark has-text-weight-bold ml-6">
                   Explore
                 </Link>
@@ -170,7 +174,7 @@ function App() {
                   {userId ?
                     <>
                       
-                      <Link to='/profile' className="button mr-3" id="button--color">
+                      <Link to='/profile' className="button--color button mr-3">
                         <p className='is-white is-size-5'>Profile</p>
                       </Link>
                       <button className="button is-white mr-6" onClick={() => handleLogout()}>
@@ -179,12 +183,9 @@ function App() {
                     </>
                     :
                     <>
-                      <Link to='/register' className="button mr-3" id="button--color">
-                        <p className='is-size-5 has-text-weight-bold has-text-white'>Sign up</p>
-                      </Link>
-                      <Link to='/login' className="button is-light mr-6">
-                        <p className='is-size-5'>Log in</p>
-                      </Link>
+                      <Link to={linkStatus ? '/register' : '/login'} className="button--color" id="button--register" onClick={() => handleLink()}>
+                        <p className='is-size-4'>{linkStatus ? `Sign Up` : `Sign In`}</p>
+                      </Link> 
                     </>
                   }
                   
@@ -242,7 +243,7 @@ function App() {
           } />
           <Route path="register" element={
             <PublicRoute notLoggedIn={!userId}>
-              <Register handleRegister={handleRegister}  />
+              <Register handleRegister={handleRegister} registerStatus={registerStatus}/>
             </PublicRoute>
           } />
         </Routes>
