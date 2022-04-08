@@ -19,6 +19,23 @@
     background-position: center;
     background-size: cover
 }
-.buttons #button--color{
+.buttons .button--color{
     background-color: var(--teal);
+    color:white;
+    margin-right:2.5vw;
+    border-radius: 5px;
+    width:120px;
+    height:45px;
+    font-weight:700;
+    outline:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+ #button--register:hover{
+    outline: none;    
+    color: white;
+    background-color: var(--orange);
+    
 }
