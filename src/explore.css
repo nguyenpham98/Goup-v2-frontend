@@ -10,3 +10,11 @@
 #explore__title {
     margin-bottom: -8%;
 }
+@media (max-width:1024px){
+    #explore__container {
+        padding: 10% 5%;
+    }
+    #explore__card {
+      width:100%;
+    }
+}

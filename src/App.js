@@ -133,7 +133,7 @@ function App() {
           <div id='logo' className="navbar-item ml-6"></div>
                 </Link>
             {userId && <>
-            <Link to='/'
+            <span
               onClick={() => {
                 setIsActive(!isActive);
               }} 
@@ -145,7 +145,7 @@ function App() {
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
-            </Link>
+            </span>
             </>
             }
           </div>
