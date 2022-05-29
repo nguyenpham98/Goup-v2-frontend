@@ -17,9 +17,7 @@ const Home = () => {
               <span className="homepage--button">Begin Your Journey</span>
           </div>
         </div>
-        <div className="homepage--explore">
-            <Explore />
-        </div>
+       
         </div>
     )
 }

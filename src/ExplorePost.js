@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom'
 
 const ExplorePost = ({post}) => {
     const [isFollowing, setIsFollowing] = useState(post.is_following)
+    const [Like, setLike] = useState(false)
     let isAuthorCurrentUser = post.is_author_current_user
 
+    function handleLike() {
+        setLike(!Like)
+    }
     const handleFollow = (userId) => {
         fetch(`http://localhost:5000/follow/${userId}`, {
             method: 'POST',
@@ -68,11 +72,15 @@ const ExplorePost = ({post}) => {
 
                 </div>
 
-                <div className="content">
+                <div className="content pb-1">
                     <p className='is-size-6 ml-3'>{post.body}</p>
-                    <p className='is-italic'>Posted on {post.timestamp}</p>
+                    <p className='is-italic is-size-7'>Posted on {post.timestamp}</p>
                 </div>
+                
             </div>
+            <span className="icon pt-1mt-1 mb-4" style={{marginLeft: 90+ '%', color: Like ? "#eb1e4b" : "gray"}}>
+                 <i className="fab fa-2x fa-gratipay" onClick={handleLike}></i>
+                </span>
         </div> 
     )
 }

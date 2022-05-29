@@ -8,7 +8,7 @@ const Register = ({handleRegister, registerStatus}) => {
     const [passwordStatus, setPasswordStatus] = useState("")
     const isValidPassword = (e) => {
         var pw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/.test(e.target.value)
-        if(pw || e.target.value == ""){
+        if(pw || e.target.value === ""){
         setPasswordStatus("")
         setPassword(e.target.value)
         }

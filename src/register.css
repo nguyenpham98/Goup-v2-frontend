@@ -20,4 +20,8 @@
 .box .button{
     background-color: var(--pink);
     color: white;
+    transition: background-color 0.4s;
+}
+.box .button:hover{
+    background-color: var(--teal);
 }
