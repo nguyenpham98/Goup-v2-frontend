@@ -33,6 +33,7 @@
 }
 .homepage--info #title-1{
     font-size: 2vw;
+    font-weight: 600;
 }
 .homepage--button{
     background: var(--orange);
@@ -56,4 +57,54 @@
     overflow:auto;
     height:100%;
     width:25vw;
+}
+@media (max-width: 768px) { 
+    .page{
+        width: 100%;
+        margin-top:1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .page--left,.page--right{
+        width:85%;
+        text-align: justify;
+        align-items: center;
+    }
+    .page--left{
+        font-size: 14vw;
+    }
+    .homepage--info #title-1{
+        font-size: 5vw;
+        text-align: center;
+    }
+    
+}
+@media (max-width: 1023px) { 
+    .textcontainer{
+        display: flex;
+        flex-direction: column;
+        float:left;
+        width:90%;
+        justify-content: center;
+    }
+    .home--textarea, .home--textarea:focus {
+        margin-top: 5vw;
+        margin-bottom: 2vw;
+        padding:2vw;
+        border-radius: 6px;
+        border: solid 1px var(--teal);
+        outline: none;
+        resize: none;
+    }
+    #submitbutton{
+        background-color: var(--teal);
+        color:white;
+        font-weight: 600;
+    }
+}
+@media (min-width: 1024px) { 
+    .textcontainer{
+        display: none;
+    }
 }

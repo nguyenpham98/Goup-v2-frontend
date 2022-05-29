@@ -19,3 +19,32 @@
     background-position: center;
     background-size: cover
 }
+#navbarButton{
+    background-color: var(--teal);
+    color:white;
+    border-radius: 10px;
+}
+@media (max-width: 1023px){
+    .navbar-brand{
+        display: flex;
+        justify-content: space-between;
+    }
+    #logo{
+        left:50%;
+        transform: translate(-25%,0%);
+    }
+    .navbarItem{
+        cursor: pointer;
+        margin-left:10px;
+        font-weight: 300;
+        font-size: 1.2rem;
+        color:black;
+        display: block;
+    }
+    .navbarItem:hover{
+        color: var(--pink);
+    }
+    #navbarButton{
+        display: none;
+    }
+}

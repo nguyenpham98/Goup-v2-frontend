@@ -154,36 +154,32 @@ function App() {
             <div className="navbar-start">
               {userId && 
               <>
-                  <Link to='/explore' className="navbar-item is-size-5 has-text-primary-dark has-text-weight-bold ml-6">
+                  <Link to='/explore' className={isActive ? "navbarItem" : "navbar-item is-size-5 has-text-primary-dark has-text-weight-bold ml-6"}>
                   Explore
                 </Link>
-                <button className="button is-info is-rounded ml-6" onClick={() => setOpenModal(true)}>
+                <span id="navbarButton"className={isActive ? "navbarItem" : "button ml-4"} onClick={() => setOpenModal(true)}>
                   <p className='is-size-5'>Make a post</p>
-                </button>
+                </span>
               </>
               }
               
             </div>
             
             <div className="navbar-end">
-              <div className="navbar-item">
-                <div className="buttons">
                   {userId &&
                     <>
                       
-                      <Link to='/profile' className="button--color button mr-3">
+                      <Link to='/profile' className={isActive ? "navbarItem" :"button--color button mr-3"}>
                         <p className='is-white is-size-5'>Profile</p>
                       </Link>
-                      <button className="button is-white mr-6" onClick={() => handleLogout()}>
+                      <span className={isActive ? "navbarItem" : "button is-white mr-6"} onClick={() => handleLogout()}>
                         <p className='is-size-5'>Log out</p>
-                      </button>
+                      </span>
                     </>
 
                   }
                   
                 </div>
-              </div>
-            </div>
           </div>
         </nav>
 
@@ -191,23 +187,25 @@ function App() {
           <div className="modal-background" onClick={() => setOpenModal(false)}></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title has-text-weight-bold has-text-info">Make a post</p>
-                <button className='button is-success is-small' onClick={() => handleAddPost(postBody)}>✓</button>
+              <p className="modal-card-title has-text-weight-bold has-text-success">Make a post</p>
+              <button className='button is-danger is-small' onClick={() => setOpenModal(false)}>X</button>
             </header>
             <section className="modal-card-body">
               <form>
-                <textarea className='textarea is-info mb-3' rows="7" placeholder={'What\'s on your thought?'} 
+                <textarea className='textarea is-success mb-3' rows="7" placeholder={'What\'s on your thought?'} 
                   value={postBody} onChange={(e) => setPostBody(e.target.value)} />
                 
               </form>
+              
             </section>
+            <button className='button is-success is-large' onClick={() => handleAddPost(postBody)}>✓ Post</button>
           </div>
         </div>
 
         <Routes>
           <Route index path="/" element={
              <PrivateRoute auth={userId}>
-              <Home/>
+              <Home postBody={postBody} setPostBody={setPostBody} handleAddPost={handleAddPost} />
             </PrivateRoute> 
           } />
           <Route path="explore" element={

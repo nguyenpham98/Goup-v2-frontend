@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Home.css"
-import Explore from './Explore'
-const Home = () => {
+const Home = ({postBody,setPostBody, handleAddPost}) => {
     return (
         <div className="main">
         <div className="page">
@@ -17,7 +16,11 @@ const Home = () => {
               <span className="homepage--button">Begin Your Journey</span>
           </div>
         </div>
-       
+        <div className="textcontainer">
+            <textarea className="home--textarea" rows="4" placeholder={'What\'s on your thought?'} 
+            value={postBody} onChange={(e) => setPostBody(e.target.value)} />
+             <button id="submitbutton" className='button mb-3' onClick={() => handleAddPost(postBody)}>Post</button>
+        </div>
         </div>
     )
 }
