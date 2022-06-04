@@ -48,7 +48,6 @@ function App() {
   const handleRegister = (username, email, password) => {
     fetch('http://localhost:5000/auth/register', {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

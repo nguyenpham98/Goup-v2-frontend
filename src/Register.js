@@ -19,7 +19,6 @@ const Register = ({handleRegister, registerStatus}) => {
         }
         
     }
-    console.log(password)
     return (
         <div className="page register--page">
             <div className="page--left">
