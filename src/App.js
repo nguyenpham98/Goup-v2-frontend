@@ -4,7 +4,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link
+  Link, 
 } from "react-router-dom"
 import Home from './Home';
 import Explore from './Explore';
@@ -79,9 +79,9 @@ function App() {
   }
 
   const handleAddPost = () => {
-    fetch('http://localhost:5000/add-post', {
+    fetch('http://localhost:5000/user/add-post', {
       method: 'POST',
-      credentials: 'include',
+      credentials: "include",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -94,7 +94,6 @@ function App() {
       .then(data => {
         setPostBody("")
         setOpenModal(false)
-        console.log(data)
       })
       .catch(err => console.log("Error: ", err))
   

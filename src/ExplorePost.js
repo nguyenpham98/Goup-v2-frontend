@@ -48,8 +48,8 @@ const ExplorePost = ({post}) => {
             <div className="card-content">
                 <div className="media">
                     <div className="media-content">
-                        <Link to={`/profile/${post.author.id}`}>
-                            <p className="is-size-4 has-text-black">@{post.author.username || 'Gouper'}</p>
+                        <Link to={`/profile/${post.user.id}`}>
+                            <p className="is-size-4 has-text-black">@{post.user.username || 'Gouper'}</p>
 
                         </Link>
 
@@ -58,11 +58,11 @@ const ExplorePost = ({post}) => {
                         <>
                             {isFollowing ?
                                 <div className='media-right'>
-                                    <button className='button is-outlined' onClick={() => handleUnfollow(post.author.id)}>Followed ✔</button>
+                                    <button className='button is-outlined' onClick={() => handleUnfollow(post.user.id)}>Followed ✔</button>
                                 </div>
                                 :
                                 <div className='media-right'>
-                                    <button className='button is-outlined' onClick={() => handleFollow(post.author.id)}>Follow</button>
+                                    <button className='button is-outlined' onClick={() => handleFollow(post.user.id)}>Follow</button>
                                 </div>
                             }
                         </>
@@ -73,8 +73,8 @@ const ExplorePost = ({post}) => {
                 </div>
 
                 <div className="content pb-1">
-                    <p className='is-size-6 ml-3'>{post.body}</p>
-                    <p className='is-italic is-size-7'>Posted on {post.timestamp}</p>
+                    <p className='is-size-6 ml-3'>{post.content}</p>
+                    <p className='is-italic is-size-7'>Posted on {post.createDate}</p>
                 </div>
                 
             </div>

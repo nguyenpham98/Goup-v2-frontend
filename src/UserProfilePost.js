@@ -31,7 +31,7 @@ const UserProfilePost = ({post, index}) => {
             <article className={`message ${color}`} >
                 <div className="message-body">
                     <div className='is-inline-flex'>
-                        <p className='is-size-6'>{post.body}</p><br />{ }
+                        <p className='is-size-6'>{post.content}</p><br />{ }
                         <button className={`button is-small is-info is-light ${color}`} onClick={() => setOpenModal(true)}>
                             <span className="icon">
                                 <i className="fas fa-edit"></i>
@@ -39,7 +39,7 @@ const UserProfilePost = ({post, index}) => {
                         </button>
                     </div>
                     
-                    <p className='has-text-black is-italic'>Posted on {post.timestamp}</p>
+                    <p className='has-text-black is-italic'>Posted on {post.createDate}</p>
                 </div>
             </article>
         </div>
