@@ -4,6 +4,23 @@ const UserProfilePost = ({post, index}) => {
     const [openModal, setOpenModal] = useState(false)
     const [content, setContent] = useState(post.body)
     let color = index % 2 === 0 ? 'is-info' : 'is-success'
+    
+    const handleEditPost = (id, content) => {
+        fetch('http://localhost:5000/user/edit-post', {
+            method: "POST",
+            header: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: {
+                id: id,
+                content: content
+            }
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+    }
 
     return (
         <div className='mb-6'>
@@ -12,7 +29,7 @@ const UserProfilePost = ({post, index}) => {
                 <div className="modal-card">
                     <header className="modal-card-head">
                         <p className="modal-card-title has-text-weight-bold has-text-info">Edit my post</p>
-                        <button className='button is-success is-small'>✓</button>
+                        <button className='button is-success is-small' onClick={() => handleEditPost(post.id, content)}>✓</button>
                     </header>
                     <section className="modal-card-body">
                         <form>

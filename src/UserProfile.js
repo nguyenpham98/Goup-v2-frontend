@@ -7,6 +7,24 @@ const UserProfile = () => {
     const [bio, setBio] = useState("")
     const [posts, setPosts] = useState([])
     const [openModal, setOpenModal] = useState(false)
+    const handleEditProfile = (username, bio) => {
+        fetch('http://localhost:5000/user/edit-profile', {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                about_me: bio
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+    }
+
     useEffect(() => {
         fetch('http://localhost:5000/user/my-profile', {
             credentials: 'include'
@@ -38,7 +56,7 @@ const UserProfile = () => {
                 <div className="modal-card">
                     <header className="modal-card-head">
                         <p className="modal-card-title has-text-weight-bold has-text-info">Edit my profile</p>
-                        <button className='button is-success is-small'>✓</button>
+                        <button className='button is-success is-small' onClick={() => handleEditProfile(username, bio)}>✓</button>
                     </header>
                     <section className="modal-card-body">
                         <form>
