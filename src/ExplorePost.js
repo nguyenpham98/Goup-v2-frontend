@@ -6,8 +6,19 @@ const ExplorePost = ({post}) => {
     const [Like, setLike] = useState(false)
     let isAuthorCurrentUser = post.is_author_current_user
 
-    function handleLike() {
+    function handleLike(postId) {
         setLike(!Like)
+        fetch(`http://localhost:5000/user/${Like ? "like" : "unlike"}/${postId}`, {
+            method: 'POST',
+            header: {
+                'Accept': "application/json",
+                "Content-Type": "application/json"
+            },
+            credential: 'include',
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
     }
     const handleFollow = (userId) => {
         fetch(`http://localhost:5000/user/follow/${userId}`, {
@@ -72,7 +83,7 @@ const ExplorePost = ({post}) => {
                 
             </div>
             <span className="icon pt-1mt-1 mb-4" style={{marginLeft: 90+ '%', color: Like ? "#eb1e4b" : "gray"}}>
-                 <i className="fab fa-2x fa-gratipay" onClick={handleLike}></i>
+                 <i className="fab fa-2x fa-gratipay" onClick={() => handleLike(post.id, !Like)}></i>
                 </span>
         </div> 
     )
