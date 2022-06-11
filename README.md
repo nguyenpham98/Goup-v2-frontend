@@ -3,6 +3,6 @@
 Backend written in Spring Boot, using PostgreSQL database and AWS RDS for cloud support: 
 https://github.com/nguyenpham98/Goup-backend-v3
 
-![HomePage](/screenshots/home.png)
-![LandingPage](/screenshots/landing.png)
-![LoginPage](/screenshots/login.png)
+![HomePage](/src/screenshots/home.png)
+![LandingPage](/src/screenshots/landing.png)
+![LoginPage](/src/screenshots/login.png)
