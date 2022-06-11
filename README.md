@@ -4,6 +4,7 @@ Goup is a full stack social media app that allows users to:
 - register/login
 - create new posts
 - follow/like other users
+
 Technologies: 
 - Frontend: React, Bulma, HTML/CSS (credits to: https://github.com/kimpham301)
 - Backend: Spring Boot, PostgreSQL, AWS RDS. Link: https://github.com/nguyenpham98/Goup-backend-v3
