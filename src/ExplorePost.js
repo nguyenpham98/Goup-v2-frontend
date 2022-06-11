@@ -10,7 +10,7 @@ const ExplorePost = ({post}) => {
         setLike(!Like)
     }
     const handleFollow = (userId) => {
-        fetch(`http://localhost:5000/follow/${userId}`, {
+        fetch(`http://localhost:5000/user/follow/${userId}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -18,16 +18,12 @@ const ExplorePost = ({post}) => {
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                setIsFollowing(true)
-                console.log(data)
-            })
+            .then(() => setIsFollowing(!isFollowing))
             .catch(err => console.log("Error: ", err))
     }
 
     const handleUnfollow = (userId) => {
-        fetch(`http://localhost:5000/unfollow/${userId}`, {
+        fetch(`http://localhost:5000/user/unfollow/${userId}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -35,11 +31,7 @@ const ExplorePost = ({post}) => {
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                setIsFollowing(false)
-                console.log(data)
-            })
+            .then(() => setIsFollowing(!isFollowing))
             .catch(err => console.log("Error: ", err))
     }
 
@@ -65,6 +57,7 @@ const ExplorePost = ({post}) => {
                                     <button className='button is-outlined' onClick={() => handleFollow(post.user.id)}>Follow</button>
                                 </div>
                             }
+                        
                         </>
                     }
                     
