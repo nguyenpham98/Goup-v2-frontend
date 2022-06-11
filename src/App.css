@@ -19,23 +19,32 @@
     background-position: center;
     background-size: cover
 }
-.buttons .button--color{
+#navbarButton{
     background-color: var(--teal);
     color:white;
-    margin-right:2.5vw;
-    border-radius: 5px;
-    width:120px;
-    height:45px;
-    font-weight:700;
-    outline:none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    border-radius: 10px;
 }
- #button--register:hover{
-    outline: none;    
-    color: white;
-    background-color: var(--orange);
-    
+@media (max-width: 1023px){
+    .navbar-brand{
+        display: flex;
+        justify-content: space-between;
+    }
+    #logo{
+        left:50%;
+        transform: translate(-25%,0%);
+    }
+    .navbarItem{
+        cursor: pointer;
+        margin-left:10px;
+        font-weight: 300;
+        font-size: 1.2rem;
+        color:black;
+        display: block;
+    }
+    .navbarItem:hover{
+        color: var(--pink);
+    }
+    #navbarButton{
+        display: none;
+    }
 }

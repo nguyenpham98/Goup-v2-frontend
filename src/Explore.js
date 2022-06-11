@@ -6,7 +6,7 @@ const Explore = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/all-posts', {
+        fetch('http://localhost:5000/user/all-posts', {
             credentials: 'include'
         })
         .then(response => response.json())
@@ -24,7 +24,7 @@ const Explore = () => {
 
             <div id='explore__container' className='container'>
                 {posts && posts.map(post => 
-                    <ExplorePost post={post} key={post.postId} />
+                    <ExplorePost post={post} key={post.id} />
                 )}
             </div>
         </>

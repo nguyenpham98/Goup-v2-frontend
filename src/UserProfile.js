@@ -8,19 +8,28 @@ const UserProfile = () => {
     const [posts, setPosts] = useState([])
     const [openModal, setOpenModal] = useState(false)
     useEffect(() => {
-        fetch('http://localhost:5000/my-profile', {
+        fetch('http://localhost:5000/user/my-profile', {
             credentials: 'include'
         })
         .then(response => response.json())
         .then(data => {
-            setUsername(data.username)
-            setBio(data.bio)
-            setPosts(data.posts)
+            setUsername(data.user.username)
+            setBio(data.user.about_me)
             console.log(data)
         })
         .catch(err => console.log("Error fetching user profile", err))
     }, [])   
-    
+    useEffect(() => {
+        fetch('http://localhost:5000/user/all-my-posts', {
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setPosts(data.posts)
+            })
+            .catch(err => console.log("error fetching posts", err))
+    }, [setPosts])
     return (
         <div className='mt-6'>
 
@@ -69,7 +78,7 @@ const UserProfile = () => {
 
             <div id='user__profile__posts' className='container'>
                 {posts && posts.map((post,index) => 
-                    <UserProfilePost post={post} index={index} key={post.postId}/>
+                    <UserProfilePost post={post} index={index} key={post.id}/>
                 )}
                 
 

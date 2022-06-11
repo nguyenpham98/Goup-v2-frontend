@@ -8,3 +8,11 @@
 #user__profile__posts {
     margin: 5% 30%;
 }
+@media (max-width:1024px){
+    #user__profile__card {
+        width: 85%;
+    }
+    #user__profile__posts {
+        margin: 5% 10%;
+    }
+}

@@ -4,7 +4,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link
+  Link, 
 } from "react-router-dom"
 import Home from './Home';
 import Explore from './Explore';
@@ -22,9 +22,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [postBody, setPostBody] = useState("")
   const [openModal, setOpenModal] = useState(false)
-  const [loginStatus, setLoginStatus] = useState("")
-  const [registerStatus, setRegisterStatus] = useState("")
-  const [linkStatus, setLinkStatus] = useState(false)
+  const [messageStatus, setMessageStatus] = useState("")
   const handleLogin = (email, password) => {
     fetch('http://localhost:5000/auth/login', {
       method: 'POST',
@@ -40,7 +38,7 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        (data.error) && setLoginStatus(data.error)
+        (data.error) && setMessageStatus(data.error)
         setUserId(data.userId)
       })
       .catch(err => console.log("Error: ", err)
@@ -50,7 +48,6 @@ function App() {
   const handleRegister = (username, email, password) => {
     fetch('http://localhost:5000/auth/register', {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -63,7 +60,7 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        (data.error) && setRegisterStatus(data.error)
+        (data.error) && setMessageStatus(data.error)
         console.log(data)
         setUserId(data.userId)
       })
@@ -82,9 +79,9 @@ function App() {
   }
 
   const handleAddPost = () => {
-    fetch('http://localhost:5000/add-post', {
+    fetch('http://localhost:5000/user/add-post', {
       method: 'POST',
-      credentials: 'include',
+      credentials: "include",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -97,7 +94,6 @@ function App() {
       .then(data => {
         setPostBody("")
         setOpenModal(false)
-        console.log(data)
       })
       .catch(err => console.log("Error: ", err))
   
@@ -120,11 +116,7 @@ function App() {
         setIsLoading(false)
       })
   }, [])
-  const handleLink = () => {
-    setRegisterStatus("")
-    setLinkStatus(!linkStatus)
   
-  }
   return (
     <div>
       {isLoading ? 
@@ -133,12 +125,13 @@ function App() {
       :
       <BrowserRouter>
         <nav className="navbar mt-4" role="navigation" aria-label="main navigation">
-          <div className="navbar-brand">
+       
+        <div className="navbar-brand">
           <Link to='/'>
           <div id='logo' className="navbar-item ml-6"></div>
                 </Link>
-
-            <Link to='/'
+            {userId && <>
+            <span
               onClick={() => {
                 setIsActive(!isActive);
               }} 
@@ -150,48 +143,41 @@ function App() {
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
-            </Link>
+            </span>
+            </>
+            }
           </div>
-
+          
           <div id="navbarBasicExample" className={`navbar-menu ${isActive ? "is-active" : ""}`}>
             <div className="navbar-start">
               {userId && 
               <>
-                  <Link to='/explore' className="navbar-item is-size-5 has-text-primary-dark has-text-weight-bold ml-6">
+                  <Link to='/explore' className={isActive ? "navbarItem" : "navbar-item is-size-5 has-text-primary-dark has-text-weight-bold ml-6"}>
                   Explore
                 </Link>
-                <button className="button is-info is-rounded ml-6" onClick={() => setOpenModal(true)}>
+                <span id="navbarButton"className={isActive ? "navbarItem" : "button ml-4"} onClick={() => setOpenModal(true)}>
                   <p className='is-size-5'>Make a post</p>
-                </button>
+                </span>
               </>
               }
               
             </div>
             
             <div className="navbar-end">
-              <div className="navbar-item">
-                <div className="buttons">
-                  {userId ?
+                  {userId &&
                     <>
                       
-                      <Link to='/profile' className="button--color button mr-3">
+                      <Link to='/profile' className={isActive ? "navbarItem" :"button--color button mr-3"}>
                         <p className='is-white is-size-5'>Profile</p>
                       </Link>
-                      <button className="button is-white mr-6" onClick={() => handleLogout()}>
+                      <span className={isActive ? "navbarItem" : "button is-white mr-6"} onClick={() => handleLogout()}>
                         <p className='is-size-5'>Log out</p>
-                      </button>
+                      </span>
                     </>
-                    :
-                    <>
-                      <Link to={linkStatus ? '/register' : '/login'} className="button--color" id="button--register" onClick={() => handleLink()}>
-                        <p className='is-size-4'>{linkStatus ? `Sign Up` : `Sign In`}</p>
-                      </Link> 
-                    </>
+
                   }
                   
                 </div>
-              </div>
-            </div>
           </div>
         </nav>
 
@@ -199,23 +185,25 @@ function App() {
           <div className="modal-background" onClick={() => setOpenModal(false)}></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title has-text-weight-bold has-text-info">Make a post</p>
-                <button className='button is-success is-small' onClick={() => handleAddPost(postBody)}>✓</button>
+              <p className="modal-card-title has-text-weight-bold has-text-success">Make a post</p>
+              <button className='button is-danger is-small' onClick={() => setOpenModal(false)}>X</button>
             </header>
             <section className="modal-card-body">
               <form>
-                <textarea className='textarea is-info mb-3' rows="7" placeholder={'What\'s on your thought?'} 
+                <textarea className='textarea is-success mb-3' rows="7" placeholder={'What\'s on your thought?'} 
                   value={postBody} onChange={(e) => setPostBody(e.target.value)} />
                 
               </form>
+              
             </section>
+            <button className='button is-success is-large' onClick={() => handleAddPost(postBody)}>✓ Post</button>
           </div>
         </div>
 
         <Routes>
           <Route index path="/" element={
              <PrivateRoute auth={userId}>
-              <Home/>
+              <Home postBody={postBody} setPostBody={setPostBody} handleAddPost={handleAddPost} />
             </PrivateRoute> 
           } />
           <Route path="explore" element={
@@ -238,12 +226,12 @@ function App() {
           
           <Route path="login" element={
             <PublicRoute notLoggedIn={!userId}>
-              <Login handleLogin={handleLogin} loginStatus={loginStatus}/>
+              <Login handleLogin={handleLogin} loginStatus={messageStatus}/>
             </PublicRoute>
           } />
           <Route path="register" element={
             <PublicRoute notLoggedIn={!userId}>
-              <Register handleRegister={handleRegister} registerStatus={registerStatus}/>
+              <Register handleRegister={handleRegister} registerStatus={messageStatus}/>
             </PublicRoute>
           } />
         </Routes>

@@ -53,11 +53,22 @@ const OtherProfile = () => {
             .then(data => {
                 setUsername(data.username)
                 setBio(data.bio)
-                setPosts(data.posts)
                 setIsFollowing(data.is_following)
                 console.log(data)
             })
             .catch(err => console.log("Error fetching user profile", err))
+    }, [userId])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/user/all-user-posts/${userId}`, {
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setPosts(data.posts)
+            })
+            .catch(err => console.log("error fetching posts", err))
     }, [userId])
 
     return (
